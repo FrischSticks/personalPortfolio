@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AiOutlineMenu, AiOutlineClose, AiOutlineMail } from 'react-icons/ai'
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import Socials from './Socials'
 
 const NavBar = () => {
@@ -16,7 +16,7 @@ const handleNav = () => {
     <div id='navBar' className='fixed w-full h-20 shadow-xl z-[100] bg-[#fffdfb]'>
       <div className='flex justify-between items-center w-full h-full px-8 lg:px-12 2xl:px-16'>
         <Link href='/#main'>
-          <Image src="/../public/assets/myLogo.png" alt="My Logo" width='60' height='60' />
+          <Image src="/../public/assets/images/myLogo.png" alt="My Logo" width='60' height='60' />
         </Link>
         <ul className='hidden sm:flex justify-start'>
           <li onClick={handleNav} className='ml-10 text-lg uppercase hover:border-b-4 border-[#A42843] hover:scale-105'>

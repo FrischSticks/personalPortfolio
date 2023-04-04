@@ -22,7 +22,7 @@ const About = () => {
             Whether for work or simply to connect, I'd love to chat! Feel free to message me via the <a href='#contact' className='text-[#6a1a2b] underline'>Contact</a> form or through any of my social accounts below!
 
             </p>
-            <Image src="/../public/assets/personalPhoto.jpg" alt="A photo of myself." width='350' height='350' 
+            <Image src="/../public/assets/images/personalPhoto.jpg" alt="A photo of myself." width='350' height='350' 
                 className='mr-6 pt-3 rounded-3xl md: h-[400px] md:w-[400px] lg:h-[475px] lg:w-[475px] hover:scale-105 ease-in duration-200'
             />
         </div>
