@@ -43,7 +43,7 @@ const handleNav = () => {
       <div className={nav ? 'fixed left-0 top-0 w-full h-screen bg-black/75 sm:hidden' : ''}>
         <div className={nav ? 'fixed left-0 top-0 w-[70%] h-screen bg-[#fffdfb] p-10 ease-in duration-500' : 'hidden'}>
           <div>
-            <div className='flex w-full justify-between'>
+            <div className='flex w-full justify-between' onClick={handleNav}>
               <Link href='/#main'>
                 <Image src="/images/myLogo.png" alt="My Logo" width='50' height='50' />
               </Link>
@@ -66,7 +66,6 @@ const handleNav = () => {
                 <Link href='/#contact'>Contact</Link>
               </li>
             </ul>
-            <h1 className='w-full pt-56 text-[#A42843] items-end text-center underline-offset-1 uppercase text-xl'> — Let's Connect — </h1>
             {/* SOCIALS */}
             <Socials />
             </div>
