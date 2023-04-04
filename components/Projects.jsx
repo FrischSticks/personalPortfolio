@@ -1,8 +1,8 @@
 import React from 'react';
-import fitnessAppImg from '../public/assets/images/fitnessApp.png';
-import trvlCreativeLogo from '../public/assets/images/trvlCreativeLogo.jpg'
-import cryptoCommonsAppImg from '../public/assets/images/cryptoCommonsApp.png'
-import trvlTokenImg from '../public/assets/images/trvlTokenFun.png'
+import fitnessAppImg from '../public/images/fitnessApp.png';
+import trvlCreativeLogo from '../public/images/trvlCreativeLogo.jpg'
+import cryptoCommonsAppImg from '../public/images/cryptoCommonsApp.png'
+import trvlTokenImg from '../public/images/trvlTokenFun.png'
 import ProjectCard from './ProjectCard';
 
 const Projects = () => {
