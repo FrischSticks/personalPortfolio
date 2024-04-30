@@ -1,0 +1,77 @@
+.contact {
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+    border-radius: 2.5%;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+#user_name, #user_email, .user_message {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#user_name {
+    margin-top: 0px;
+}
+
+#message {
+    height: 250px;
+}
+
+#submitBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #6a1a2b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+#submitBtn:hover {
+    scale: 1.02;
+}
+
+.phoneNumber, .emailAddress {
+    font-size: 20px;
+    font-style: italic;
+    display: flex;
+    justify-content:flex-end;
+    color: #6a1a2b;
+}
+
+p.emailAddress, p.phoneNumber {
+    margin: 0px;
+}
+
+.popup {
+    display: block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+  }
+
+  /* CLASS ADDED AFTER MESSAGE IS SENT (DISAPPEARS AFTER 5 SECONDS) */
+  input.greenButton {
+    background-color: green;
+    color: #fff;
+  }

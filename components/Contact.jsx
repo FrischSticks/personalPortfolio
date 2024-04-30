@@ -1,65 +1,95 @@
-import React, { useState } from 'react'
-import Socials from './Socials'
-import emailjs from 'emailjs-com';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Socials from './Socials';
+import emailjs from '@emailjs/browser';
+import styles from '../styles/Contact.module.css'; // Import CSS using Next.js's built-in CSS Modules
+
+// Initialize emailjs
+emailjs.init({
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+  // Do not allow headless browsers
+  blockHeadless: true,
+  // blockList: {
+  //   // Block the suspended emails
+  //   list: ['foo@emailjs.com', 'bar@emailjs.com'],
+  //   // The variable contains the email address
+  //   watchVariable: 'userEmail',
+  // },
+  limitRate: {
+    // Set the limit rate for the application
+    id: 'app',
+    // Allow 1 request per 10s
+    throttle: 10000,
+  },
+});
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [buttonText, setButtonText] = useState('Send'); // Initialize button text
+  const [isMessageSent, setIsMessageSent] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    emailjs.sendForm('service_wdl2pxm', 'template_wgjywnp', e.target, '4C4jlz9zmqANPKvjx')
-      .then((result) => {
-        console.log('Message Sent!');
-        alert('Message Sent!')
-      }, (error) => {
-        console.log(error.text);
-        alert(`I'm sorry, but your message failed to deliver. Please try again! If the problem persists, you can reach me at FrischeEvan@gmail.com.`)
+  const { register, handleSubmit, errors, reset } = useForm(); // Use useForm hook
+
+    // Ensure that the errors object is defined before accessing its properties
+    const nameError = errors && errors.name ? errors.name.message : '';
+    const emailError = errors && errors.email ? errors.email.message : '';
+    const messageError = errors && errors.message ? errors.message.message : '';
+
+  const submitForm = (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    
+    // Your emailjs.sendForm logic here
+    emailjs.sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, 'template_wgjywnp', '#' + styles.contactForm)
+      .then((response) => {
+        console.log('Email sent successfully:', response.status, response.text);
+        setIsMessageSent(true); // Set flag for styling
+        setButtonText('Message Sent!'); // Update button text on success
+        reset();
+         // Reset button state after 5 seconds (5000 milliseconds)
+        setTimeout(() => {
+          setButtonText('Send');
+          setIsMessageSent(false);
+        }, 5000);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+        setButtonText('Message Failed to Send'); // Update button text on success
+        // Reset button state after 5 seconds (5000 milliseconds)
+        setTimeout(() => {
+          setButtonText('Send');
+          setIsMessageSent(false);
+        }, 5000);
       });
-    setName('');
-    setEmail('');
-    setMessage('');
   };
 
-
   return (
-        <div id='contact' className='w-full lg:h-screen m-20 max-w-[90vw] mx-10 mt-[30%] scroll-mt-36'>
-            <h1 className='text-[#6a1a2b] pb-1 mb-6 uppercase tracking-wider'>CONTACT ME</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col w-[90vw] lg:w-[90vw] mb-20 lg:mb-40">
-
-              <div className='flex flex-start mt-5'>
-                <div className='flex flex-col w-[30vw] lg:w-[40vw]'>
-                  <label htmlFor="name" className="font-bold uppercase">Full Name:</label>
-                  <input type="text" id="name" name="name" className="p-1 rounded-lg shadow-lg w-full" 
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}  value={name}
-                  required />
-                </div>
-
-                <div className='flex flex-col ml-5 w-[30vw] lg:w-[40vw]'>
-                  <label htmlFor="email" className="font-bold uppercase">Email:</label>
-                  <input type="email" id="email" name="email" className="p-1 rounded-lg shadow-lg w-full" 
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}  value={email} 
-                  required />
-                </div>
-              </div>
-
-              <label htmlFor="message" className="font-bold uppercase mt-4">Message:</label>
-              <textarea id="message" name="message" className="w-[85vw] p-1 mt-2 rounded-lg shadow-lg lg:w-[90vw] h-[15vw]" 
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}  value={message} 
-              required></textarea>
-
-              <input type="submit" value="Submit" className="bg-[#6a1a2b] text-white font-bold py-2 mt-5 rounded-full hover:bg-[#631828] transition duration-300 w-[85vw] lg:w-[90vw]" />
-            </form>
-            <Socials />
+  <div id='contact' className='mt-[60%] mx-10 lg:mt-[100%] xl:mt-[60%] md:h-screen m-20 scroll-mt-36'>
+    <h1 className='text-[#6a1a2b] pb-1 mb-6 uppercase tracking-wider'>Contact</h1>
+        <div className={styles.contact}>
+          <form id={styles.contactForm} onSubmit={handleSubmit(submitForm)}>
+            <label id={styles.user_name} htmlFor="user_name"> Name</label>
+            <input type="text" name="name" 
+              {...register('name', { required: true })} />
+               {nameError && <p>{nameError}</p>}
+            <label id={styles.user_email} htmlFor="user_email">Email</label>
+            <input type="email" name="email"
+              {...register('email', { required: 'Email is required', pattern: /^\S+@\S+$/i })}/>
+              {emailError && <p>{emailError}</p>}
+            <label htmlFor="message" className={styles.user_message}>Message</label>
+            <textarea id={styles.message} name="message" {...register('message', { required: true })} />
+            {messageError && <p>{messageError}</p>}
+            <input id={styles.submitBtn} type="submit" value={buttonText}
+            // CONDITIONAL CLASS NAME
+              className={isMessageSent ? 'greenButton' : ''}
+            />
+          </form>
+          <p className={styles.phoneNumber}> 812-528-6288 </p>
+          <p className={styles.emailAddress}> FrischeEvan@gmail.com </p>
         </div>
-  )
-}
+      <Socials />
+    </div>
+  );
+};
 
 export default Contact
