@@ -22,6 +22,17 @@ const Projects = () => {
         />
 
 
+{/* THIS PROJECT NEEDS TO BE UPDATED - API OUTDATED */}
+        {/* <ProjectCard 
+            title='Crypto Commons App'
+            bgImage={cryptoCommonsAppImg}
+            toolset='React — Ant Design — Rapid API'
+            btn1URL='https://cryptocommons.netlify.app/'
+            btn2URL='https://github.com/FrischSticks/cryptoCommons'
+            btn1Text='View Site'
+            btn2Text='View Code'
+        /> */}
+
         <ProjectCard 
             title='TRVL Creative Company'
             bgImage={trvlCreativeLogo}
