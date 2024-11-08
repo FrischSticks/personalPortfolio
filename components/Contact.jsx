@@ -26,6 +26,7 @@ emailjs.init({
 const Contact = () => {
   const [buttonText, setButtonText] = useState('Send'); // Initialize button text
   const [isMessageSent, setIsMessageSent] = useState(false);
+  const phoneNumber = 8125286288;
 
   const { register, handleSubmit, errors, reset } = useForm(); // Use useForm hook
 
@@ -84,8 +85,7 @@ const Contact = () => {
               className={isMessageSent ? 'greenButton' : ''}
             />
           </form>
-          <p className={styles.phoneNumber}> 812-528-6288 </p>
-          <p className={styles.emailAddress}> FrischeEvan@gmail.com </p>
+          <a href={`tel:${phoneNumber}`} className={styles.phoneNumber}>812-528-6288</a>
         </div>
       <Socials />
     </div>
