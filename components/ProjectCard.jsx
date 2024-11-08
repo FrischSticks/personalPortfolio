@@ -13,15 +13,16 @@ const ProjectCard = ({title, bgImage, toolset, btn1URL, btn2URL, btn1Text, btn2T
                     <Link href={btn1URL} rel="noopener noreferrer" target="_blank" className='text-[#6a1a2b] font-semibold uppercase text-center bg-[#fffdfb] rounded-xl p-2 px-3 mx-2'>
                         {btn1Text}
                     </Link>
-                    <Link href={btn2URL} rel="noopener noreferrer" target="_blank" className='text-[#6a1a2b] font-semibold uppercase text-center bg-[#fffdfb] rounded-xl p-2 px-3 mx-2'>
-                        {btn2Text}
-                    </Link>
+                    {btn2URL && btn2Text && (
+                        <Link href={btn2URL} rel="noopener noreferrer" target="_blank" className='text-[#6a1a2b] font-semibold uppercase text-center bg-[#fffdfb] rounded-xl p-2 px-3 mx-2'>
+                            {btn2Text}
+                        </Link>
+                    )}
                 </div>
                 <p className='text-[#fffdfb] pt-10 text-xs text-center italic'>{toolset}</p>
             </div>
         </div>
     </div>
-    
   )
 }
 
